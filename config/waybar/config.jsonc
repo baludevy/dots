@@ -1,0 +1,55 @@
+{
+  "layer": "top",
+  "position": "bottom",
+  "height": 34,
+  "spacing": 4,
+
+  "modules-left": ["hyprland/workspaces"],
+  "modules-center": ["hyprland/window"],
+  "modules-right": ["network", "battery", "custom/control_center", "clock"],
+
+  "hyprland/workspaces": {
+    "format": "{name}",
+    "disable-scroll": true,
+    "all-outputs": true
+  },
+
+  "hyprland/window": {
+    "format": " {title} ",
+    "max-length": 40,
+    "separate-outputs": true
+  },
+
+  "memory": {
+    "format": "󰍛 {used}G",
+    "interval": 10
+  },
+
+  "network": {
+    "format-wifi": "  {essid}",
+    "format-ethernet": "󰈀 ",
+    "format-disconnected": "󰖪 ",
+    "tooltip-format": "{signalStrength}%"
+  },
+
+  "battery": {
+    "states": {
+      "warning": 30,
+      "critical": 15
+    },
+    "format": "{icon} {capacity}%",
+    "format-charging": "󱐋 {capacity}%",
+    "format-icons": ["󰁺", "󰁼", "󰁾", "󰂀", "󰁹"]
+  },
+
+  "clock": {
+    "format": "󱑒 {:%H:%M}",
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+  },
+
+  "custom/control_center": {
+    "format": "",
+    "on-click": "eww open --toggle control_panel",
+    "tooltip-format": "Control Panel"
+  }
+}

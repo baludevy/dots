@@ -1,0 +1,62 @@
+{
+    "logo": {
+        "source": "~/.config/fastfetch/violetchan.png",
+        "type": "auto",
+        "height": 12,
+        "padding": {
+            "top": 1,
+            "left": 1,
+            "right": 4
+        }
+    },
+    "display": {
+        "separator": " ➔  ",
+        "color": {
+            "keys": "35",
+            "output": "37"
+        }
+    },
+    "modules": [
+        {
+            "type": "custom",
+            "format": "\n"
+        },
+        {
+            "type": "custom",
+            "format": ""
+        },
+        "title",
+        {
+            "type": "custom",
+            "format": "──────────────────────────────"
+        },
+        {
+            "type": "host",
+            "key": "host"
+        },
+        {
+            "type": "uptime",
+            "key": "up  "
+        },
+        {
+            "type": "cpu",
+            "key": "cpu "
+        },
+        {
+            "type": "memory",
+            "key": "mem "
+        },
+        {
+            "type": "disk",
+            "key": "disk"
+        },
+        {
+            "type": "custom",
+            "format": "──────────────────────────────"
+        },
+        {
+            "type": "custom",
+            "format": ""
+        }
+    ]
+}

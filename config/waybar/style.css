@@ -1,0 +1,64 @@
+@import "../colors/colors.css";
+
+* {
+    font-family: "JetBrainsMono Nerd Font", "monospace";
+    font-size: 13px;
+    font-weight: 500;
+}
+
+window#waybar {
+    background: alpha(@base, 0.8);
+    border-top: 1px solid alpha(@text, 0.05);
+    color: @text;
+}
+
+#workspaces {
+    margin-left: 8px;
+}
+
+#workspaces button {
+    color: @overlay0;
+    background: transparent;
+    padding: 0 10px;
+    transition: all 0.2s ease;
+    border-radius: 6px;
+}
+
+#workspaces button:hover {
+    color: @text;
+}
+
+#workspaces button.active {
+    color: @text;
+    background: alpha(@text, 0.08);
+    border-radius: 6px;
+    margin: 4px 2px;
+}
+
+#workspaces button.urgent {
+    color: @red;
+}
+
+#window {
+    color: @subtext0;
+    font-size: 12px;
+}
+
+#clock, #battery, #network, #memory, #pulseaudio, #custom-control_center {
+    padding: 0 12px;
+    color: @subtext1;
+    border-radius: 6px;
+}
+
+#clock {
+    margin-right: 8px;
+}
+
+#battery.critical {
+    color: @red;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}

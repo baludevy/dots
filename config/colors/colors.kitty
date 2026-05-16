@@ -1,0 +1,46 @@
+# --- Theme Colors ---
+foreground            #f8f9e8
+background            #232a2e
+selection_foreground  #232a2e
+selection_background  #adc9bc
+
+# --- Cursor colors ---
+cursor                #f8f9e8
+cursor_text_color     #232a2e
+
+# --- URL underline color ---
+url_color             #b2caed
+
+# --- Terminal Colors (0-15) ---
+
+# Black (Crust / Surface1)
+color0                #171c1f
+color8                #374145
+
+# Red (Red / Cherry)
+color1                #f57f82
+color9                #fae6ef
+
+# Green (Green / Lime)
+color2                #cbe3b3
+color10               #dbe6af
+
+# Yellow (Yellow)
+color3                #f5d098
+color11               #f5d098
+
+# Blue (Blue / Skye)
+color4                #b2caed
+color12               #b3e6db
+
+# Magenta/Purple (Purple / Pink)
+color5                #d2bdf3
+color13               #f3c0e5
+
+# Cyan (Aqua / Snow)
+color6                #b3e3ca
+color14               #afd9e6
+
+# White (Text / Subtext1)
+color7                #f8f9e8
+color15               #adc9bc

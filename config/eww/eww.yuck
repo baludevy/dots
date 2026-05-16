@@ -1,0 +1,94 @@
+(defpoll vol_val :interval "1s" :initial "50" "scripts/volume.sh get")
+(defpoll vol_icon :interval "1s" :initial "󰕾" "scripts/volume.sh icon")
+(defpoll bright_val :interval "1s" :initial "50" "scripts/brightness.sh")
+(defpoll wifi_icon :interval "2s" :initial "󰖪" "scripts/network.sh icon")
+(defpoll wifi_ssid :interval "2s" :initial "Disconnected" "scripts/network.sh ssid")
+(defpoll bt_icon :interval "2s" :initial "󰂲" "scripts/bluetooth.sh icon")
+(defpoll bt_text :interval "2s" :initial "Off" "scripts/bluetooth.sh text")
+
+(defpoll bat_icon :interval "5s" :initial "󰁹" "scripts/battery.sh icon")
+(defpoll bat_percent :interval "5s" :initial "100" "scripts/battery.sh percent")
+(defpoll bat_time :interval "10s" :initial "" "scripts/battery.sh time")
+
+(defpoll wifi_list :interval "5s" "scripts/network.sh list")
+(defpoll bt_list :interval "5s" "scripts/bluetooth.sh list")
+
+(defvar wifi_reveal false)
+(defvar bt_reveal false)
+
+(defvar osd_icon "󰕾")
+(defvar osd_value "50")
+(defvar osd_title "Volume")
+
+(defwindow control_panel
+  :monitor 0
+  :geometry (geometry :x "4px"
+                      :y "6px"
+                      :width "400px"
+                      :anchor "bottom right")
+  :stacking "fg"
+  :exclusive false
+  (panel_layout))
+
+(defwindow osd
+  :monitor 0
+  :geometry (geometry :x "0"
+                      :y "20px"
+                      :width "280px"
+                      :anchor "top center")
+  :stacking "fg"
+  :exclusive false
+  (osd_layout))
+
+(defwidget osd_layout []
+  (box :class "osd-box" :orientation "h" :space-evenly false :spacing 15
+    (label :class "osd-icon" :text osd_icon)
+    (box :orientation "v" :valign "center" :hexpand true :space-evenly false :spacing 5
+      (label :class "osd-title" :text osd_title :halign "start")
+      (scale :class "osd-slider" :min 0 :max 101 :value osd_value))))
+
+(defwidget panel_layout []
+  (box :class "outer-box" :orientation "v" :space-evenly false
+    
+    (box :class "toggle-row" :orientation "h" :spacing 10 :homogeneous true
+      
+      (button :class {wifi_reveal ? "toggle-btn active" : "toggle-btn"} 
+              :onclick "eww update wifi_reveal=${!wifi_reveal} bt_reveal=false"
+              :onrightclick "nmcli radio wifi \$(nmcli radio wifi | grep -q enabled && echo off || echo on)"
+        (box :orientation "h" :space-evenly false :spacing 8
+          (label :class "icon" :text wifi_icon)
+          (label :class "text" :text wifi_ssid :limit-width 14)))
+      
+      (button :class {bt_reveal ? "toggle-btn active" : "toggle-btn"} 
+              :onclick "eww update bt_reveal=${!bt_reveal} wifi_reveal=false"
+              :onrightclick "bluetoothctl power \$(bluetoothctl show | grep -q 'Powered: yes' && echo off || echo on)"
+        (box :orientation "h" :space-evenly false :spacing 8
+          (label :class "icon" :text bt_icon)
+          (label :class "text" :text bt_text))))
+    
+    (revealer :transition "slidedown" :reveal wifi_reveal :duration "200ms"
+      (box :class "menu-dropdown" :orientation "v" :space-evenly false
+        (scroll :height 180 :vscroll true (literal :content wifi_list))))
+
+    (revealer :transition "slidedown" :reveal bt_reveal :duration "200ms"
+      (box :class "menu-dropdown" :orientation "v" :space-evenly false
+        (scroll :height 180 :vscroll true (literal :content bt_list))))
+    
+    (box :class "slider-row" :orientation "h" :space-evenly false
+      (button :class "slider-icon-btn" :onclick "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+        (label :class "slider-icon" :text vol_icon))
+      (scale :class "slider" :hexpand true :min 0 :max 101 :value vol_val :onchange "wpctl set-volume @DEFAULT_AUDIO_SINK@ {}%"))
+    
+    (box :class "slider-row" :orientation "h" :space-evenly false
+      (label :class "slider-icon" :text "󰃠")
+      (scale :class "slider" :hexpand true :min 10 :max 101 :value bright_val :onchange "brightnessctl set {}%"))
+
+    (box :class "battery-row" :orientation "h" :space-evenly false :spacing 12
+      (label :class "battery-icon" :text bat_icon)
+      (label :class "battery-text" :text "${bat_percent}% ${bat_time != '' ? '(' + bat_time + ')' : ''}"))
+
+    (box :class "power-row" :orientation "h" :spacing 10 :homogeneous true
+      (button :class "power-btn shutdown" :onclick "systemctl poweroff" "󰐥")
+      (button :class "power-btn reboot" :onclick "systemctl reboot" "󰜉")
+      (button :class "power-btn lock" :onclick "hyprlock" "󰌾")
+      (button :class "power-btn logout" :onclick "hyprctl dispatch exit" "󰍃"))))
