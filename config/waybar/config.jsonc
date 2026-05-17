@@ -1,7 +1,7 @@
 {
   "layer": "top",
   "position": "top",
-  "height": 36,
+  "height": 32,
   "spacing": 4,
   "modules-left": [
     "hyprland/workspaces"
@@ -12,11 +12,11 @@
   ],
 
   "modules-right": [
+    "tray",
     "cpu",
     "temperature",
     "memory",
     "network",
-   
     "battery"
   ],
 
@@ -24,6 +24,12 @@
     "format": "{name}",
     "disable-scroll": true,
     "all-outputs": true
+  },
+
+  "tray": {
+    "icon-size": 16,
+    "max-icon-size": 16,
+    "spacing": 4
   },
 
   "hyprland/window": {

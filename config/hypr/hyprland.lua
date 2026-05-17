@@ -130,11 +130,12 @@ hl.config({
     decoration = {
         rounding = 10,
         blur = {
-            enabled           = true,
-            size              = 16,
-            passes            = 3,
-            new_optimizations = true,
+            enabled            = true,
+            size               = 16,
+            passes             = 3,
+            new_optimizations  = true,
             popups_ignorealpha = 0.1,
+	    xray	       = false,
         },
     },
     animations = {

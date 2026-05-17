@@ -17,7 +17,7 @@ window#waybar {
 }
 
 #workspaces button {
-    color: @overlay0;
+    color: @foreground;
     background: transparent;
     padding: 0 10px;
     transition: all 0.2s ease;
@@ -29,10 +29,14 @@ window#waybar {
 }
 
 #workspaces button.active {
-    color: @text;
+    color: @overlay0;
     background: alpha(@text, 0.08);
     border-radius: 6px;
     margin: 4px 2px;
+}
+
+#workspaces button.inactive {
+    color: @subtext1;
 }
 
 #workspaces button.urgent {
@@ -44,12 +48,11 @@ window#waybar {
     font-size: 12px;
 }
 
-#clock, #battery, #network, #memory, #cpu, #temperature, #pulseaudio {
-    padding: 0 12px;
-    color: @subtext1;
+#clock, #battery, #network, #memory, #cpu, #temperature, #pulseaudio, #tray {
+    padding: 0 8px;
+    color: @subtext0;
     border-radius: 6px;
 }
-
 
 #battery.critical {
     color: @red;
