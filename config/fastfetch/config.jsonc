@@ -39,16 +39,14 @@
             "key": "up  "
         },
         {
-            "type": "cpu",
-            "key": "cpu "
-        },
-        {
             "type": "memory",
-            "key": "mem "
+            "key": "mem ",
+            "format": "{used} / {total}"
         },
         {
             "type": "disk",
-            "key": "disk"
+            "key": "disk",
+            "format": "{size-used} / {size-total}"
         },
         {
             "type": "custom",

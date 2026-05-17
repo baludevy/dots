@@ -6,7 +6,7 @@
 
   "modules-left": ["hyprland/workspaces"],
   "modules-center": ["hyprland/window"],
-  "modules-right": ["network", "battery", "custom/control_center", "clock"],
+  "modules-right": ["battery", "clock"],
 
   "hyprland/workspaces": {
     "format": "{name}",
@@ -45,11 +45,5 @@
   "clock": {
     "format": "󱑒 {:%H:%M}",
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
-  },
-
-  "custom/control_center": {
-    "format": "",
-    "on-click": "eww open --toggle control_panel",
-    "tooltip-format": "Control Panel"
   }
 }

@@ -1,6 +1,15 @@
-
 if [[ $- == *i* ]]; then
-    fastfetch
+    MIN_LINES=17
+    MIN_COLS=75
+
+    CURRENT_LINES=$(tput lines 2>/dev/null || echo "${LINES:-0}")
+    CURRENT_COLS=$(tput cols 2>/dev/null || echo "${COLUMNS:-0}")
+
+    if (( CURRENT_LINES >= MIN_LINES && CURRENT_COLS >= MIN_COLS )); then
+        stty -echo
+        fastfetch
+        stty echo
+    fi
 fi
 
 clear() {

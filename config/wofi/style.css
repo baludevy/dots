@@ -1,3 +1,5 @@
+@import "/home/balu/.config/colors/colors.css";
+
 * {
     font-family: 'JetBrainsMono Nerd Font', sans-serif;
     font-size: 14px;
@@ -7,7 +9,7 @@
 
 window {
     margin: 0px;
-    background-color: rgba(35, 42, 46, 0.8);
+    background-color: alpha(@base, 0.85);
     border-radius: 6px;
 }
 
@@ -20,8 +22,8 @@ window {
 #input {
     margin: 15px 15px 10px 15px;
     padding: 4px 8px;
-    background-color: rgba(43, 51, 55, 0.8);
-    color: #f8f9e8;
+    background-color: alpha(@surface0, 0.85);
+    color: @text;
     border-radius: 6px;
 }
 
@@ -45,10 +47,10 @@ window {
 
 #text {
     margin-left: 12px;
-    color: #f8f9e8;
+    color: @text;
 }
 
 #entry:selected {
-    background-color: rgba(28, 34, 37, 0.5);
+    background-color: alpha(@mantle, 0.5);
     border-radius: 6px;
 }

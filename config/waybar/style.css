@@ -7,7 +7,7 @@
 }
 
 window#waybar {
-    background: alpha(@base, 0.8);
+    background: alpha(@base, 0.85);
     border-top: 1px solid alpha(@text, 0.05);
     color: @text;
 }
@@ -44,7 +44,7 @@ window#waybar {
     font-size: 12px;
 }
 
-#clock, #battery, #network, #memory, #pulseaudio, #custom-control_center {
+#clock, #battery, #network, #memory, #pulseaudio {
     padding: 0 12px;
     color: @subtext1;
     border-radius: 6px;

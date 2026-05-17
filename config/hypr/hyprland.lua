@@ -1,14 +1,3 @@
--- hyprland.lua
--- Converted from hyprland.conf to Hyprland 0.55+ Lua config format
-
---------------------
----- COLOR THEME ----
---------------------
-
--- Previously: source = $HOME/.config/colors/colors.conf
--- Lua equivalent: use require() to source a separate colors file
--- require("colors")  -- uncomment and create ~/.config/hypr/colors.lua if needed
-
 ------------------
 ---- MONITORS ----
 ------------------
@@ -34,7 +23,7 @@ hl.env("ADW_DEBUG_COLOR_SCHEME", "prefer-dark")
 hl.on("hyprland.start", function()
     hl.exec_cmd("gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark'")
     hl.exec_cmd("gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'")
-    hl.exec_cmd(os.getenv("HOME") .. "/.local/scripts/waybar.sh")
+    hl.exec_cmd(os.getenv("HOME") .. "/.local/scripts/launch-waybar.sh")
     hl.exec_cmd("mako")
     hl.exec_cmd("hypridle")
     hl.exec_cmd("hyprpaper")
@@ -74,10 +63,10 @@ hl.bind(mainMod .. " + W",            hl.dsp.window.close())
 hl.bind(mainMod .. " + SHIFT + W",    hl.dsp.exec_cmd("pkill -USR2 waybar"))
 hl.bind(mainMod .. " + SHIFT + Q",    hl.dsp.exit())
 hl.bind(mainMod .. " + F",            hl.dsp.window.fullscreen())
-hl.bind(mainMod .. " + V",            hl.dsp.window.float({ action = "toggle" }))
+hl.bind(mainMod .. " + S",            hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + C",            hl.dsp.exec_cmd("eww open --toggle control_panel"))
 
--- Volume
+-- Volumes
 hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("/home/balu/dots/config/eww/scripts/osd.sh volume up"),    { locked = true, repeating = true })
 hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("/home/balu/dots/config/eww/scripts/osd.sh volume down"),  { locked = true, repeating = true })
 hl.bind("XF86AudioMute",        hl.dsp.exec_cmd("/home/balu/dots/config/eww/scripts/osd.sh volume mute"),  { locked = true })
@@ -86,11 +75,11 @@ hl.bind("XF86AudioMute",        hl.dsp.exec_cmd("/home/balu/dots/config/eww/scri
 hl.bind("XF86MonBrightnessUp",   hl.dsp.exec_cmd("/home/balu/dots/config/eww/scripts/osd.sh brightness up"),   { locked = true, repeating = true })
 hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("/home/balu/dots/config/eww/scripts/osd.sh brightness down"), { locked = true, repeating = true })
 
+-- Power Profile
+hl.bind(mainMod .. " + P", hl.dsp.exec_cmd("/home/balu/dots/config/eww/scripts/osd.sh power"), { locked = true })
+
 -- Screenshot
 hl.bind(mainMod .. " + SHIFT + S", hl.dsp.exec_cmd('grim -g "$(slurp)" - | wl-copy'))
-
--- Window switcher
-hl.bind(mainMod .. " + TAB", hl.dsp.exec_cmd("wofi --show window"))
 
 -- Special workspace (scratchpad)
 hl.bind(mainMod .. " + U",         hl.dsp.workspace.toggle_special("magic"))
@@ -141,8 +130,8 @@ hl.window_rule({ name = "size-wifi-password-prompt", match = { title = "^(Wi-Fi 
 
 hl.config({
     general = {
-        gaps_in    = 2,
-        gaps_out   = 4,
+        gaps_in    = 4,
+        gaps_out   = 6,
         border_size = 0,
     },
     decoration = {
@@ -169,12 +158,19 @@ hl.config({
     },
 })
 
--- Custom animation curve
-hl.curve("snappy", { type = "bezier", points = { {0.1, 1.0}, {0.1, 1.0} } })
+-- Curves
+hl.curve("pace",      { type = "bezier", points = { {0.46, 1},    {0.29, 0.99} } })
+hl.curve("overshot",  { type = "bezier", points = { {0.13, 0.99}, {0.29, 1.1}  } })
+hl.curve("md3_decel", { type = "bezier", points = { {0.05, 0.7},  {0.1, 1}     } })
 
-hl.animation({ leaf = "windows",    enabled = true, speed = 3, bezier = "snappy", style = "popin 95%" })
-hl.animation({ leaf = "workspaces", enabled = true, speed = 4, bezier = "snappy", style = "slidefade 10%" })
-hl.animation({ leaf = "fade",       enabled = true, speed = 3, bezier = "snappy" })
+-- Animations
+hl.animation({ leaf = "windowsIn",        enabled = true, speed = 6,  bezier = "md3_decel", style = "slide" })
+hl.animation({ leaf = "windowsOut",       enabled = true, speed = 6,  bezier = "md3_decel", style = "slide" })
+hl.animation({ leaf = "windowsMove",      enabled = true, speed = 6,  bezier = "md3_decel", style = "slide" })
+hl.animation({ leaf = "fade",             enabled = true, speed = 1,  bezier = "md3_decel" })
+hl.animation({ leaf = "workspaces",       enabled = true, speed = 5,  bezier = "md3_decel", style = "slide" })
+hl.animation({ leaf = "specialWorkspace", enabled = true, speed = 8,  bezier = "md3_decel", style = "slide" })
+hl.animation({ leaf = "border",           enabled = true, speed = 10, bezier = "md3_decel" })
 
 ---------------------
 ---- LAYER RULES ----
@@ -182,8 +178,10 @@ hl.animation({ leaf = "fade",       enabled = true, speed = 3, bezier = "snappy"
 
 hl.layer_rule({ name = "blur-waybar", match = { namespace = "waybar" }, blur = true })
 
+hl.layer_rule({ name = "blur-kitty", match = { namespace = "kitty" }, blur = true })
+
 hl.layer_rule({ name = "blur-mako",   match = { class = "mako" },       blur = true })
 hl.layer_rule({ name = "mako-alpha",  match = { class = "mako" },       ignore_alpha = 0.1 })
 
 hl.layer_rule({ name = "blur-wofi",  match = { class = "wofi" },       ignore_alpha = 0.1 })
-hl.layer_rule({ name = "anim-wofi",  match = { class = "wofi" },       animation = "popin 95%" })
+hl.layer_rule({ name = "anim-wofi",  match = { class = "wofi" },       animation = "popin 80%" })
