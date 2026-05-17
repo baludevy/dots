@@ -1,19 +1,19 @@
 @import "../colors/colors.css";
 
 * {
-    font-family: "JetBrainsMono Nerd Font", "monospace";
-    font-size: 13px;
+    font-family: "Fira Code Nerd Font", monospace;
+    font-size: 14px;
     font-weight: 500;
 }
 
 window#waybar {
-    background: alpha(@base, 0.85);
+    background: alpha(@base, 0.75);
     border-top: 1px solid alpha(@text, 0.05);
     color: @text;
 }
 
 #workspaces {
-    margin-left: 8px;
+    margin-left: 6px;
 }
 
 #workspaces button {
@@ -44,15 +44,12 @@ window#waybar {
     font-size: 12px;
 }
 
-#clock, #battery, #network, #memory, #pulseaudio {
+#clock, #battery, #network, #memory, #cpu, #temperature, #pulseaudio {
     padding: 0 12px;
     color: @subtext1;
     border-radius: 6px;
 }
 
-#clock {
-    margin-right: 8px;
-}
 
 #battery.critical {
     color: @red;

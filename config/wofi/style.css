@@ -1,7 +1,7 @@
 @import "/home/balu/.config/colors/colors.css";
 
 * {
-    font-family: 'JetBrainsMono Nerd Font', sans-serif;
+    font-family: 'Fira Code Nerd Font', monospace;
     font-size: 14px;
     border: none;
     outline: none;
@@ -9,8 +9,8 @@
 
 window {
     margin: 0px;
-    background-color: alpha(@base, 0.85);
-    border-radius: 6px;
+    background-color: alpha(@base, 0.75);
+    border-radius: 10px;
 }
 
 #outer-box {

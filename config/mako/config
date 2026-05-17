@@ -1,15 +1,15 @@
 font=JetBrainsMono Nerd Font 10
-width=300
-height=80
+width=400
+height=100
 padding=8
 margin=4
 border-size=1
-border-radius=6
+border-radius=10
 icon-location=left
 max-icon-size=48
 default-timeout=5000
 
-background-color=#232a2e41
+background-color=#1e1e2e55
 text-color=#ffffff
 border-color=#374145
 progress-color=#b2caed

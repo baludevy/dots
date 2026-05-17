@@ -1,12 +1,24 @@
 {
   "layer": "top",
-  "position": "bottom",
-  "height": 34,
+  "position": "top",
+  "height": 36,
   "spacing": 4,
+  "modules-left": [
+    "hyprland/workspaces"
+  ],
 
-  "modules-left": ["hyprland/workspaces"],
-  "modules-center": ["hyprland/window"],
-  "modules-right": ["battery", "clock"],
+  "modules-center": [
+    "clock"
+  ],
+
+  "modules-right": [
+    "cpu",
+    "temperature",
+    "memory",
+    "network",
+   
+    "battery"
+  ],
 
   "hyprland/workspaces": {
     "format": "{name}",
@@ -20,16 +32,39 @@
     "separate-outputs": true
   },
 
-  "memory": {
-    "format": "󰍛 {used}G",
+  "cpu": {
+    "format": " {usage}%",
     "interval": 10
   },
 
+  "memory": {
+    "format": "󰍛 {used:0.1f}G",
+    "interval": 10
+  },
+
+  "temperature": {
+    "hwmon-path": "/sys/class/hwmon/hwmon6/temp2_input",
+    "critical-threshold": 80,
+    "format": "{icon} {temperatureC}°C",
+    "format-icons": [
+      "",
+      "",
+      ""
+    ]
+  },
+
   "network": {
-    "format-wifi": "  {essid}",
+    "format-wifi": "{icon}",
     "format-ethernet": "󰈀 ",
     "format-disconnected": "󰖪 ",
-    "tooltip-format": "{signalStrength}%"
+    "format-icons": [
+      "󰤯",
+      "󰤟",
+      "󰤢",
+      "󰤥",
+      "󰤨"
+    ],
+    "tooltip-format": "{essid} ({signalStrength}%)"
   },
 
   "battery": {
@@ -39,11 +74,17 @@
     },
     "format": "{icon} {capacity}%",
     "format-charging": "󱐋 {capacity}%",
-    "format-icons": ["󰁺", "󰁼", "󰁾", "󰂀", "󰁹"]
+    "format-icons": [
+      "󰁺",
+      "󰁼",
+      "󰁾",
+      "󰂀",
+      "󰁹"
+    ]
   },
 
   "clock": {
-    "format": "󱑒 {:%H:%M}",
+    "format": "{:%m/%d - %H:%M}",
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
   }
 }

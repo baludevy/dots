@@ -16,10 +16,6 @@ for item in "$DOTFILES/config"/*; do
     name=$(basename "$item")
     target="$CONFIG/$name"
 
-    if [ -e "$target" ] || [ -L "$target" ]; then
-        mv "$target" "${target}.bak.$(date +%s)"
-    fi
-
     ln -sfn "$item" "$target"
 done
 
@@ -28,10 +24,6 @@ if [ -d "$DOTFILES/scripts" ]; then
         [ -f "$script" ] || continue
         name=$(basename "$script")
         target="$SCRIPTS/$name"
-
-        if [ -e "$target" ] || [ -L "$target" ]; then
-            mv "$target" "${target}.bak.$(date +%s)"
-        fi
 
         ln -sfn "$script" "$target"
     done
